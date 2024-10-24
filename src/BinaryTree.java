@@ -99,6 +99,27 @@ public class BinaryTree {
         return left || right;
     }
 
+    static int hd = 0;
+    static HashMap<Integer, Integer> map= new HashMap<>();
+    public static void topView(Node root, int hd){
+        if(root == null){
+            return;
+        }
+        if(!map.containsKey(hd)){
+            map.put(hd,root.data);
+        }
+        topView(root.left,hd-1);
+        topView(root.right,hd+1);
+    }
+
+    public static void printTop(HashMap<Integer, Integer> map) {
+        List<Integer> keys = new ArrayList<>(map.keySet());
+        Collections.sort(keys);
+        for (Integer key : keys) {
+            System.out.print(map.get(key) + " ");
+        }
+    }
+
     static class Binarytree {
         static int index = -1;
 
@@ -190,7 +211,7 @@ public class BinaryTree {
         root.left.left = new Node(4);
         root.left.right = new Node(5);
         root.right.right = new Node(6);
-        root.right.right.left = new Node(7);
+//        root.right.right.left = new Node(7);
 //        System.out.println(diameter2(root).diam);
 
 
@@ -198,6 +219,7 @@ public class BinaryTree {
         subroot.left = new Node(4);
         subroot.right = new Node(5);
 
-        System.out.println(isSubtree(root,subroot));
+        topView(root,hd);
+        printTop(map);
     }
 }
