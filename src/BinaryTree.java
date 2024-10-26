@@ -180,6 +180,16 @@ public class BinaryTree {
         return root;
     }
 
+    public static int minDistanceBetween2Nodes(Node root, int n1, int n2){
+        if(root == null){
+            return -1;
+        }
+        Node lca = lowestAncestor2(root,n1,n2);
+        int dist1 = lcaDistance(lca,n1);
+        int dist2 = lcaDistance(lca,n2);
+        return dist1+dist2;
+    }
+
     public static int lcaDistance(Node root, int n){
         if(root == null){
             return -1;
@@ -188,16 +198,14 @@ public class BinaryTree {
             return 0;
         }
         int leftDist =  lcaDistance(root.left,n);
-        return leftDist;
-    }
-    public static int minDistanceBetween2Nodes(Node root, int n1, int n2){
-        if(root == null){
+        int rightDist = lcaDistance(root.right,n);
+        if(leftDist == -1 && rightDist == -1){
             return -1;
+        } else if (leftDist == -1) {
+            return rightDist +1;
+        }else{
+            return leftDist+1;
         }
-        Node lca = lowestAncestor2(root,n1,n2);
-        int dist1 = lcaDistance(root,n1);
-        int dist2 = lcaDistance(root,n2);
-        return dist1+dist2;
     }
 
     static class Binarytree {
@@ -305,8 +313,10 @@ public class BinaryTree {
 //        int level = 1;
 //        kLevel(root,2,level);
 
-        int n1 = 4, n2 = 5;
+        int n1 = 4, n2 = 6;
 //        System.out.println(lowestAncestor(root,n1,n2).data);
-        System.out.println(lowestAncestor2(root,n1,n2).data);
+//        System.out.println(lowestAncestor2(root,n1,n2).data);
+
+        System.out.println(minDistanceBetween2Nodes(root,n1,n2));
     }
 }
