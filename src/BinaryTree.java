@@ -227,6 +227,19 @@ public class BinaryTree {
         return max+1;
     }
 
+    public static int tranform(Node root){
+        if(root == null){
+            return 0;
+        }
+        int leftChild = tranform(root.left);
+        int rightChild = tranform(root.right);
+        int data = root.data;
+        int newLeft = root.left == null ? 0 : root.left.data;
+        int newRight = root.right == null ? 0 : root.right.data;
+        root.data = leftChild+rightChild+newLeft+ newRight;
+        return data;
+    }
+
     static class Binarytree {
         static int index = -1;
 
@@ -338,6 +351,16 @@ public class BinaryTree {
 
 //        System.out.println(minDistanceBetween2Nodes(root,n1,n2));
 
-        kthAncestor(root,5,1);
+//        kthAncestor(root,5,1);
+
+        tranform(root);
+        System.out.println(root.data);
+        System.out.println(root.left.data);
+        System.out.println(root.right.data);
+        System.out.println(root.left.left.data);
+        System.out.println(root.left.right.data);
+        System.out.println(root.right.left.data);
+        System.out.println(root.right.right.data);
+
     }
 }
