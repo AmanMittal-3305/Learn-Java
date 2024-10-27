@@ -208,6 +208,25 @@ public class BinaryTree {
         }
     }
 
+    public static int kthAncestor(Node root, int n , int k){
+        if(root == null){
+            return -1;
+        }
+        if(root.data == n){
+            return 0;
+        }
+        int leftDist = kthAncestor(root.left,n,k);
+        int rightDist = kthAncestor(root.right, n,k);
+        if(leftDist == -1 && rightDist == -1){
+            return -1;
+        }
+        int max = Math.max(leftDist,rightDist);
+        if(max +1 == k){
+            System.out.println(root.data);
+        }
+        return max+1;
+    }
+
     static class Binarytree {
         static int index = -1;
 
@@ -298,8 +317,8 @@ public class BinaryTree {
         root.right = new Node(3);
         root.left.left = new Node(4);
         root.left.right = new Node(5);
-        root.right.right = new Node(6);
-        root.right.left = new Node(7);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
 //        System.out.println(diameter2(root).diam);
 
 
@@ -317,6 +336,8 @@ public class BinaryTree {
 //        System.out.println(lowestAncestor(root,n1,n2).data);
 //        System.out.println(lowestAncestor2(root,n1,n2).data);
 
-        System.out.println(minDistanceBetween2Nodes(root,n1,n2));
+//        System.out.println(minDistanceBetween2Nodes(root,n1,n2));
+
+        kthAncestor(root,5,1);
     }
 }
