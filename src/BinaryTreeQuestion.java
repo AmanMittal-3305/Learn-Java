@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class BinaryTreeQuestion {
 
     static class Node {
@@ -51,6 +53,56 @@ public class BinaryTreeQuestion {
         System.out.print(root.data + " ");
         printTree(root.left);
         printTree(root.right);
+    }
+
+    //Path Sum II -> https://leetcode.com/problems/path-sum-ii/description/
+    public static ArrayList<ArrayList<Integer>> pathSum(Node root, int targetSum) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        ArrayList<Integer> path = new ArrayList<>();
+        dfs(root, targetSum, path, ans);
+        return ans;
+    }
+
+    private static void dfs(Node root, int targetSum, ArrayList<Integer> path, ArrayList<ArrayList<Integer>> ans) {
+        if (root == null) {
+            return;
+        }
+
+        // Add current node's value to the path and update targetSum
+        path.add(root.data);
+        targetSum -= root.data;
+
+        // Check if we're at a leaf node and the path sum equals targetSum
+        if (root.left == null && root.right == null && targetSum == 0) {
+            ans.add(new ArrayList<>(path)); // Add a copy of the path to results
+        } else {
+            // Recur down to left and right children
+            dfs(root.left, targetSum, path, ans);
+            dfs(root.right, targetSum, path, ans);
+        }
+
+        // Backtrack to explore other paths
+        path.remove(path.size() - 1);
+    }
+
+
+    //Path Sum -> https://leetcode.com/problems/path-sum/
+    public boolean hasPathSum(Node root, int targetSum) {
+        // If root is null, return false as there's no path
+        if (root == null) {
+            return false;
+        }
+
+        // Subtract the root's value from targetSum
+        targetSum -= root.data;
+
+        // Check if we have reached a leaf node and targetSum equals zero
+        if (root.left == null && root.right == null) {
+            return targetSum == 0;
+        }
+
+        // Recur down the left and right subtrees
+        return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
     }
 
     public static void main(String[] args) {
