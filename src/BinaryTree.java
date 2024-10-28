@@ -227,12 +227,12 @@ public class BinaryTree {
         return max+1;
     }
 
-    public static int tranform(Node root){
+    public static int transform(Node root){
         if(root == null){
             return 0;
         }
-        int leftChild = tranform(root.left);
-        int rightChild = tranform(root.right);
+        int leftChild = transform(root.left);
+        int rightChild = transform(root.right);
         int data = root.data;
         int newLeft = root.left == null ? 0 : root.left.data;
         int newRight = root.right == null ? 0 : root.right.data;
@@ -353,14 +353,14 @@ public class BinaryTree {
 
 //        kthAncestor(root,5,1);
 
-        tranform(root);
-        System.out.println(root.data);
-        System.out.println(root.left.data);
-        System.out.println(root.right.data);
-        System.out.println(root.left.left.data);
-        System.out.println(root.left.right.data);
-        System.out.println(root.right.left.data);
-        System.out.println(root.right.right.data);
+//        transform(root);
+//        System.out.println(root.data);
+//        System.out.println(root.left.data);
+//        System.out.println(root.right.data);
+//        System.out.println(root.left.left.data);
+//        System.out.println(root.left.right.data);
+//        System.out.println(root.right.left.data);
+//        System.out.println(root.right.right.data);
 
     }
 }
