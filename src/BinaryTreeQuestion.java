@@ -85,7 +85,6 @@ public class BinaryTreeQuestion {
         path.remove(path.size() - 1);
     }
 
-
     //Path Sum -> https://leetcode.com/problems/path-sum/
     public boolean hasPathSum(Node root, int targetSum) {
         // If root is null, return false as there's no path
