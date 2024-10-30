@@ -104,6 +104,30 @@ public class BinaryTreeQuestion {
         return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
     }
 
+
+    // Max path Sum -> https://leetcode.com/problems/binary-tree-maximum-path-sum/description/
+    private int maxSum = Integer.MIN_VALUE;
+
+    public int maxPathSum(Node root) {
+        maxGain(root);
+        return maxSum;
+    }
+
+    private int maxGain(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftGain = Math.max(maxGain(node.left), 0);
+        int rightGain = Math.max(maxGain(node.right), 0);
+
+        int currentPathSum = node.data + leftGain + rightGain;
+
+        maxSum = Math.max(maxSum, currentPathSum);
+
+        return node.data + Math.max(leftGain, rightGain);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
