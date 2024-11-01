@@ -128,6 +128,41 @@ public class BinaryTreeQuestion {
         return node.data + Math.max(leftGain, rightGain);
     }
 
+    // Sum Root to Leaf Numbers -> https://leetcode.com/problems/sum-root-to-leaf-numbers/description/
+    public int sumNumbers(Node root) {
+
+        if (root == null) {
+            return 0;
+        }
+
+        int[] sum = {0};
+
+        helper(root, 0, sum);
+
+        return sum[0];
+
+    }
+
+    private static void helper(Node root, int currentSum, int[] sum) {
+
+        if (root == null) {
+            return;
+        }
+
+        currentSum = currentSum * 10 + root.data;
+
+        if (root.left == null && root.right == null) {
+
+            sum[0] += currentSum;
+
+            return;
+        }
+
+        helper(root.left, currentSum, sum);
+
+        helper(root.right, currentSum, sum);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
