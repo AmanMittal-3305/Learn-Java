@@ -69,6 +69,21 @@ public class BinarySearchTree {
         return root;
     }
 
+    public static void printInRange(Node root, int k1, int k2){
+        if(root == null){
+            return;
+        }
+        if(root.data >= k1 && root.data <= k2){
+            printInRange(root.left,k1,k2);
+            System.out.print(root.data + " ");
+            printInRange(root.right,k1,k2);
+        } else if (root.data < k1) {
+            printInRange(root.right, k1, k2);
+        }else {
+            printInRange(root.left, k1, k2);
+        }
+    }
+
     public static void inorder(Node root){
         if (root == null){
             return;
@@ -96,10 +111,12 @@ public class BinarySearchTree {
 //        } else {
 //            System.out.println("Not found");
 //        }
-        inorder(root);
-        System.out.println();
-        delete(root,3);
-        inorder(root);
+//        inorder(root);
+//        System.out.println();
+//        delete(root,3);
+//        inorder(root);
+
+        printInRange(root,2,7);
     }
 
 }
