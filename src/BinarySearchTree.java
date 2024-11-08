@@ -84,6 +84,36 @@ public class BinarySearchTree {
         }
     }
 
+    public static void rootToLeaf(Node root, ArrayList<Integer> path) {
+        if (root == null) {
+            return;
+        }
+        path.add(root.data);
+        if (root.left == null && root.right == null) {
+            System.out.println(path);
+        } else {
+            rootToLeaf(root.left, path);
+            rootToLeaf(root.right, path);
+        }
+        path.remove(path.size() - 1);
+    }
+
+    public static boolean validateBST(Node root) {
+        return validateBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private static boolean validateBST(Node node, int min, int max) {
+        if (node == null) {
+            return true;
+        }
+        if (node.data <= min || node.data >= max) {
+            return false;
+        }
+        return validateBST(node.left, min, node.data) && validateBST(node.right, node.data, max);
+    }
+
+
+
     public static void inorder(Node root){
         if (root == null){
             return;
@@ -95,7 +125,7 @@ public class BinarySearchTree {
 
 
     public static void main(String[] args) {
-        int[] values = {5, 1, 3, 4, 2, 7};
+        int[] values = {8,5,3,6,10,11,14};
         Node root = null;
         for (int value : values) {
             root = insert(root, value);
@@ -117,7 +147,16 @@ public class BinarySearchTree {
 //        delete(root,3);
 //        inorder(root);
 
-        printInRange(root,2,7);
+//        printInRange(root,2,7);
+
+
+//        rootToLeaf(root ,  new ArrayList<>());
+
+        if(validateBST(root)){
+            System.out.println("It is a binary search tree");
+        }else{
+            System.out.println("Not a binary search tree");
+        }
     }
 
 }
