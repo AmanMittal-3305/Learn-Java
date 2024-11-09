@@ -112,6 +112,30 @@ public class BinarySearchTree {
         return validateBST(node.left, min, node.data) && validateBST(node.right, node.data, max);
     }
 
+    public static boolean isValidateBST(Node root, Node min, Node max){
+        if(root == null){
+            return true;
+        }
+        if(min != null && root.data <= min.data){
+            return false;
+        }
+        if(max != null && root.data >= max.data){
+            return false;
+        }
+        return isValidateBST(root.left, min, root) && isValidateBST(root.right, root, max);
+    }
+
+    public static void mirrorBST(Node root){
+        if(root == null){
+            return;
+        }
+        Node temp =root.left;
+        root.left = root.right;
+        root.right =temp;
+        mirrorBST(root.left);
+        mirrorBST(root.right);
+    }
+
 
 
     public static void inorder(Node root){
@@ -152,11 +176,16 @@ public class BinarySearchTree {
 
 //        rootToLeaf(root ,  new ArrayList<>());
 
-        if(validateBST(root)){
-            System.out.println("It is a binary search tree");
-        }else{
-            System.out.println("Not a binary search tree");
-        }
+//        if(isValidateBST(root,null, null )){
+//            System.out.println("It is a binary search tree");
+//        }else{
+//            System.out.println("Not a binary search tree");
+//        }
+
+        inorder(root);
+        System.out.println();
+        mirrorBST(root);
+        inorder(root);
     }
 
 }
