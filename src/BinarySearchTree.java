@@ -148,7 +148,59 @@ public class BinarySearchTree {
     }
 
 
+    static class Info{
+        boolean isBST;
+        int size;
+        int min;
+        int max;
+        public Info(boolean isBST, int size, int min, int max){
+            this.isBST = isBST;
+            this.size = size;
+            this.min = min;
+            this.max = max;
+        }
+    }
 
+    public static int maxBST = 0;
+    public static Info largestBST(Node root){
+        if(root == null){
+            return new Info(true,0,Integer.MAX_VALUE, Integer.MIN_VALUE);
+        }
+        Info leftInfo = largestBST(root.left);
+        Info rightInfo = largestBST(root.right);
+        int size = leftInfo.size + rightInfo.size +1;
+        int min = Math.min(root.data, Math.min(leftInfo.min, rightInfo.min));
+        int max = Math.max(root.data, Math.max(leftInfo.max, rightInfo.max));
+        if(root.data <= leftInfo.max || root.data >= rightInfo.min){
+            return new Info(false,size, min, max);
+        }
+        if(leftInfo.isBST || rightInfo.isBST){
+            maxBST = Math.max(maxBST,size);
+            return new Info(true, size, min, max);
+        }
+        return new Info(false, size, min, max);
+    }
+
+    public static Node mergeAndCreateBalancedBST(Node root1, Node root2) {
+        ArrayList<Integer> rootData = new ArrayList<>();
+        getInorder(root1, rootData);
+        getInorder(root2, rootData);
+        Collections.sort(rootData);
+        int[] rootElements = new int[rootData.size()];
+        for (int i = 0; i < rootData.size(); i++) {
+            rootElements[i] = rootData.get(i);
+        }
+        return createBalancedBST(rootElements, 0, rootElements.length - 1);
+    }
+
+    public static void getInorder(Node root, ArrayList<Integer> arr){
+        if(root == null){
+            return;
+        }
+        getInorder(root.left, arr);
+        arr.add(root.data);
+        getInorder(root.right, arr);
+    }
 
 
     public static void inorder(Node root){
@@ -200,9 +252,27 @@ public class BinarySearchTree {
 //        mirrorBST(root);
 //        inorder(root);
 
-        int[] arr = {3,5,6,8,10,11,12};
-        Node root2 = createBalancedBST(arr,0,arr.length-1);
-        inorder(root2);
+//        int[] arr = {3,5,6,8,10,11,12};
+//        Node root2 = createBalancedBST(arr,0,arr.length-1);
+//        inorder(root2);
+
+        Node root2 = new Node(50);
+        root2.left = new Node(30);
+        root2.right = new Node(60);
+        root2.left.left = new Node(7);
+        root2.left.right = new Node(20);
+        root2.right.left = new Node(45);
+        root2.right.right = new Node(70);
+        root2.right.right.left = new Node(65);
+        root2.right.right.right = new Node(80);
+
+//        Info info = largestBST(root2);
+//        System.out.println("largest BST size : " + maxBST);
+
+        Node mergedRoot = mergeAndCreateBalancedBST(root, root2);
+        ArrayList<Integer> result = new ArrayList<>();
+        getInorder(mergedRoot, result);
+        System.out.println(result);
     }
 
 }
