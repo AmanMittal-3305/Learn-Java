@@ -212,6 +212,21 @@ public class BinarySearchTree {
         inorder(root.right);
     }
 
+    public static boolean isPresentNode(Node root, int val) {
+        if (root == null) {
+            return false;
+        }
+        if (root.data == val) {
+            return true;
+        }
+        if (root.data > val) {
+            return isPresentNode(root.left, val);  // Return the result of the recursive call
+        } else {
+            return isPresentNode(root.right, val);  // Return the result of the recursive call
+        }
+    }
+
+
 
     public static void main(String[] args) {
         int[] values = {8,5,3,6,10,11,14};
@@ -269,10 +284,13 @@ public class BinarySearchTree {
 //        Info info = largestBST(root2);
 //        System.out.println("largest BST size : " + maxBST);
 
-        Node mergedRoot = mergeAndCreateBalancedBST(root, root2);
-        ArrayList<Integer> result = new ArrayList<>();
-        getInorder(mergedRoot, result);
-        System.out.println(result);
+//        Node mergedRoot = mergeAndCreateBalancedBST(root, root2);
+//        ArrayList<Integer> result = new ArrayList<>();
+//        getInorder(mergedRoot, result);
+//        System.out.println(result);
+
+
+        System.out.println(isPresentNode(root,7));
     }
 
 }
