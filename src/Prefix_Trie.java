@@ -19,8 +19,8 @@ public class Prefix_Trie {
 
     public static void insert(String word){ // O(L)
         Node curr = root;
-        for(int level = 0; level < word.length(); level++){
-            int idx = word.charAt(level) - 'a';
+        for(int i = 0; i < word.length(); i++){
+            int idx = word.charAt(i) - 'a';
             if(curr.children[idx] == null){
                 curr.children[idx] = new Node();
             }else{

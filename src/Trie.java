@@ -5,7 +5,7 @@ public class Trie {
         Node[] children = new Node[26];
         boolean eow = false;
 
-        Node(){
+        public Node(){
             for(int i = 0; i < 26; i++){
                 children[i] = null;
             }
