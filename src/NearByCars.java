@@ -2,7 +2,7 @@ import java.util.*;
 
 public class NearByCars {
     static class Point implements Comparable<Point>{
-        int x,y, distSq, idx;
+        int x, y, distSq, idx;
         public Point(int x, int y, int distSq, int idx){
             this.x = x;
             this.y = y;

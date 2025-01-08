@@ -52,7 +52,7 @@ public class uniqueStrings_Trie {
     }
 
     public static void main(String[] args) {
-        String str = "ababa";
+        String str = "apple";
 
         //suffix -> insert in trie
         for(int i = 0; i <  str.length(); i++){
