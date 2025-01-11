@@ -33,22 +33,21 @@ public class BiPartite_Graph {
 
     public static boolean isBiPartite(ArrayList<Edge>[] graph) {
         int[] color = new int[graph.length];
-        Arrays.fill(color, -1); // -1 indicates unvisited
+        Arrays.fill(color, -1);
 
         for (int i = 0; i < graph.length; i++) {
-            if (color[i] == -1) { // If the vertex is unvisited
+            if (color[i] == -1) {
                 Queue<Integer> q = new LinkedList<>();
                 q.add(i);
-                color[i] = 0; // Assign the first color
+                color[i] = 0;
 
                 while (!q.isEmpty()) {
                     int curr = q.remove();
                     for (Edge e : graph[curr]) {
-                        if (color[e.dest] == -1) { // If the neighbor is unvisited
-                            color[e.dest] = 1 - color[curr]; // Alternate color
+                        if (color[e.dest] == -1) {
+                            color[e.dest] = 1 - color[curr];
                             q.add(e.dest);
                         } else if (color[e.dest] == color[curr]) {
-                            // If the neighbor has the same color as the current vertex
                             return false;
                         }
                     }
@@ -62,6 +61,12 @@ public class BiPartite_Graph {
         int V = 5;
         ArrayList<Edge>[] graph = new ArrayList[V];
         createGraph(graph);
-        System.out.println(isBiPartite(graph)); // Output: true
+        System.out.println(isBiPartite(graph));
+
+        /*
+        Acyclic -> True
+        Cyclic -> Even -> True
+        Cyclic -> Odd -> False
+         */
     }
 }
