@@ -28,7 +28,7 @@ public class Cycle_Undirected_Graph {
         graph[4].add(new Edge(4,3));
     }
 
-    public static boolean detectCycle(ArrayList<Edge>[] graph){ // O(V+E)
+    public static boolean detectCycle(ArrayList<Edge>[] graph){ // O( V + E )
         boolean[] vis = new boolean[graph.length];
         for(int i = 0; i < graph.length; i++){
             if(!vis[i]){

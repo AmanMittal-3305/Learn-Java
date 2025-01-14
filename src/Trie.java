@@ -40,8 +40,8 @@ public class Trie {
 
     public static void main(String[] args) {
         String[] words = {"the", "a", "there", "their", "any", "thee"};
-        for(int i = 0; i < words.length; i++){
-            insert(words[i]);
+        for (String word : words) {
+            insert(word);
         }
 
         System.out.println(search("theree"));

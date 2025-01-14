@@ -7,7 +7,6 @@ public class Topological_Sorting_Graphs {
             this.dest = dest;
         }
     }
-//    https://hianime.to/watch/infinite-stratos-4398?ep=37826
     static void createGraph(ArrayList<Edge>[] graph){
         for(int i = 0; i < graph.length; i++){
             graph[i] = new ArrayList<>();
@@ -22,6 +21,7 @@ public class Topological_Sorting_Graphs {
         System.out.print(src+ " ");
         for(int i = 0; i < graph.length; i++){
             if(!vis[i]){
+                vis[i] = true;
                 Edge e = graph[src].get(i);
                 topologicalSort(graph,e.dest );
             }

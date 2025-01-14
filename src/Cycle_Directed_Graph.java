@@ -18,7 +18,7 @@ public class Cycle_Directed_Graph {
         graph[3].add(new Edge(3,0));
     }
 
-    public static boolean isCycle(ArrayList<Edge>[] graph){ // O(V+E)
+    public static boolean isCycle(ArrayList<Edge>[] graph){ // O( V + E )
         boolean[] vis = new boolean[graph.length];
         boolean[] stack = new boolean[graph.length];
 
