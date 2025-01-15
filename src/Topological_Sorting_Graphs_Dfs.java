@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Topological_Sorting_Graphs {
+public class Topological_Sorting_Graphs_Dfs {
     static class Edge {
         int src, dest;
         public Edge(int src, int dest) {
