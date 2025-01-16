@@ -23,18 +23,18 @@ public class All_Path_From_Source_To_Graph {
 
     public static void dfs(ArrayList<Edge>[] graph, int src, int dest, String path){
         if(src == dest){
-            System.out.print(path);
+            System.out.println(path + dest);
+            return;
         }
         for(Edge edge : graph[src]){
-            dfs(graph, edge.dest, dest, path + edge.dest + " ");
+            dfs(graph, edge.dest, dest, path + src + " ");
         }
-        System.out.println();
     }
 
     public static void main(String[] args) {
         int V = 6;
         ArrayList<Edge>[] graph = new ArrayList[V];
         createGraph(graph);
-        dfs(graph, 5, 1, new String("5 "));
+        dfs(graph, 5, 1, new String(""));
     }
 }
