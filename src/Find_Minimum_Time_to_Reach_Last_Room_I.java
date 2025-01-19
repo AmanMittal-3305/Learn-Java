@@ -9,7 +9,12 @@ public class Find_Minimum_Time_to_Reach_Last_Room_I {
             this.time = time;
         }
     }
-//    https://hianime.to/watch/solo-leveling-season-2-arise-from-the-shadow-19413?ep=132033
+
+    public static void createGraph(ArrayList<Cell>[] graph){
+        for(int i = 0;i < graph.length; i++){
+            graph[i] = new ArrayList<>();
+        }
+    }
 
     public static void main(String[] args) {
         int row = 5;
