@@ -42,9 +42,6 @@ public class Bellman_Ford_Graph {
                 dist[i] = Integer.MAX_VALUE;
             }
         }
-        boolean[] vis = new boolean[graph.length];
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
-        pq.add(new Pair(src,0));
     }
 
     public static void main(String[] args) {
