@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MST {
+public class Prims_Graph {
     static class Edge{
         int src, dest, wt;
         public Edge(int src, int dest, int wt){
@@ -11,7 +11,6 @@ public class MST {
     }
 
     static void createGraph(ArrayList<Edge>[] graph){
-        // Initialize graph with edges
         for (int i = 0; i < graph.length; i++){
             graph[i] = new ArrayList<>();
         }
@@ -45,45 +44,44 @@ public class MST {
         graph[6].add(new Edge(6, 5, 11));
     }
 
-    public static int minimumSpanningTree(ArrayList<Edge>[] graph, int start){
-        boolean[] vis = new boolean[graph.length];
-        PriorityQueue<Edge> pq = new PriorityQueue<>(Comparator.comparingInt(e -> e.wt));
-        int mstWeight = 0;
-
-        // Start with the given node
-        vis[start] = true;
-        for (Edge e : graph[start]) {
-            pq.add(e);
+    static class Pair implements Comparable<Pair>{
+        int v, cost;
+        public Pair(int v, int cost){
+            this.v = v;
+            this.cost = cost;
         }
+        @Override
+        public int compareTo(Pair p2){
+            return this.cost - p2.cost; //ascending
+        }
+    }
 
-        while (!pq.isEmpty()) {
-            Edge edge = pq.poll();
+    public static void prims(ArrayList<Edge>[] graph){
+        boolean[] vis = new boolean[graph.length];
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
 
-            // Skip if the destination node is already visited
-            if (vis[edge.dest]) continue;
+        pq.add(new Pair(0,0));
+        int mstWt = 0;
 
-            // Mark the destination node as visited
-            vis[edge.dest] = true;
-            mstWeight += edge.wt;
-            System.out.println(edge.src + " -> " + edge.dest);
+        while(!pq.isEmpty()){
+            Pair curr = pq.remove();
+            if(!vis[curr.v]){
+                vis[curr.v] = true;
+                mstWt += curr.cost;
 
-            // Add all edges from the newly visited node to the priority queue
-            for (Edge nextEdge : graph[edge.dest]) {
-                if (!vis[nextEdge.dest]) {
-                    pq.add(nextEdge);
+                for(int i = 0; i < graph[curr.v].size(); i++){
+                    Edge e = graph[curr.v].get(i);
+                    pq.add(new Pair(e.dest, e.wt));
                 }
             }
         }
-        return mstWeight;
+        System.out.print("Final cost of MST Tree : " + mstWt);
     }
 
     public static void main(String[] args) {
-        int V = 7; // Number of vertices
+        int V = 7;
         ArrayList<Edge>[] graph = new ArrayList[V];
         createGraph(graph);
-
-        // Start from node 0
-        int result = minimumSpanningTree(graph, 0);
-        System.out.println("Weight of the Minimum Spanning Tree: " + result);
+        prims(graph);
     }
 }
