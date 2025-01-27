@@ -13,8 +13,6 @@ public class Topological_Sorting_Graphs_Dfs {
         for (int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
         }
-//        graph[0].add(new Edge(0, -1));
-//        graph[1].add(new Edge(1, -1));
         graph[2].add(new Edge(2, 3));
         graph[3].add(new Edge(3, 1));
         graph[4].add(new Edge(4, 0));
