@@ -44,41 +44,25 @@ public class Graph_Revise {
         graph[6].add(new Edge(6,5,1));
     }
 
-    public static void dfs(ArrayList<Edge>[] graph){
-        boolean[] vis = new boolean[graph.length];
-        for (int i = 0; i < graph.length; i++){
-            if(!vis[i]){
-                dfsUtil(graph,vis,i);
-            }
-        }
-    }
-    public static void dfsUtil(ArrayList<Edge>[] graph, boolean[] vis, int curr){
-        vis[curr] = true;
-        System.out.print(curr + " ");
-        for (Edge e : graph[curr]){
-            if(!vis[e.dest]){
-                dfsUtil(graph, vis,e.dest);
-            }
-        }
-    }
-
     public static void bfs(ArrayList<Edge>[] graph){
         boolean[] vis = new boolean[graph.length];
         for(int i = 0; i < graph.length; i++){
             if(!vis[i]){
-                bfsUtil(graph, vis, i);
+                bfsUtil(graph, vis);
             }
         }
     }
-    public static void bfsUtil(ArrayList<Edge>[] graph, boolean[] vis, int src){
+
+    public static void bfsUtil( ArrayList<Edge>[] graph, boolean[] vis){
         Queue<Integer> q = new LinkedList<>();
-        q.add(src);
-        while (!q.isEmpty()){
+        q.add(0);
+        while(!q.isEmpty()){
             int curr = q.remove();
             if(!vis[curr]){
                 System.out.print(curr + " ");
                 vis[curr] = true;
-                for (Edge e : graph[curr]){
+                for(int i = 0; i < graph[curr].size(); i++){
+                    Edge e = graph[curr].get(i);
                     if(!vis[e.dest]){
                         q.add(e.dest);
                     }
@@ -87,67 +71,31 @@ public class Graph_Revise {
         }
     }
 
-    public static boolean isCycle(ArrayList<Edge>[] graph){
-        boolean[] vis =new boolean[graph.length];
+    public static void dfs(ArrayList<Edge>[] graph){
+        boolean[] vis = new boolean[graph.length];
         for(int i = 0; i < graph.length; i++){
             if(!vis[i]){
-                if(isCycleUtil(graph, vis, i, -1)){
-                    return true;
-                }
+              dfsUtil(graph, vis, i);
             }
         }
-        return false;
     }
 
-    public static boolean isCycleUtil(ArrayList<Edge>[] graph, boolean[] vis, int curr, int par){
+    public static void dfsUtil(ArrayList<Edge>[] graph, boolean[] vis, int curr){
+        System.out.print(curr + " ");
         vis[curr] = true;
-        for(Edge e : graph[curr]){
-            if(vis[e.dest] && e.dest != par){
-                return true;
-            }else if(!vis[e.dest]){
-                if(isCycleUtil(graph, vis, e.dest, curr)){
-                    return true;
-                }
+        for(int i = 0; i < graph[curr].size(); i++){
+            Edge e = graph[curr].get(i);
+            if(!vis[e.dest]){
+                dfsUtil(graph, vis, e.dest);
             }
         }
-        return false;
-    }
-
-    public static boolean bipartiteGraph(ArrayList<Edge>[] graph){
-        int[] color = new int[graph.length];
-        Arrays.fill(color, -1);
-
-        for (int i = 0; i < graph.length; i++) {
-            if (color[i] == -1) {
-                Queue<Integer> q = new LinkedList<>();
-                q.add(i);
-                color[i] = 0;
-
-                while (!q.isEmpty()) {
-                    int curr = q.remove();
-                    for (Edge e : graph[curr]) {
-                        if (color[e.dest] == -1) {
-                            color[e.dest] = 1 - color[curr];
-                            q.add(e.dest);
-                        } else if (color[e.dest] == color[curr]) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
     }
 
     public static void main(String[] args) {
         int V = 7;
         ArrayList<Edge>[] graph = new ArrayList[V];
         createGraph(graph);
-        /*
+//        bfs(graph);
         dfs(graph);
-        bfs(graph);
-        System.out.println(isCycle(graph));
-        */
-        System.out.println(bipartiteGraph(graph));
     }
 }
