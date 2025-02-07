@@ -91,11 +91,39 @@ public class Graph_Revise {
         }
     }
 
+    public static boolean hasPath(ArrayList<Edge>[] graph, int src, int dest){
+        boolean[] vis = new boolean[graph.length];
+        for (int i = 0; i < graph.length; i++){
+            if(!vis[i]){
+                if(hasPathUtil(graph, vis, src, dest)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean hasPathUtil(ArrayList<Edge>[] graph, boolean[] vis, int src, int dest){
+        vis[src] = true;
+        if(src == dest){
+            return true;
+        }
+        for (int i = 0; i < graph[src].size(); i++){
+            Edge e = graph[src].get(i);
+            if(!vis[e.dest]){
+                if(hasPathUtil(graph, vis, e.dest, dest)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int V = 7;
         ArrayList<Edge>[] graph = new ArrayList[V];
         createGraph(graph);
 //        bfs(graph);
-        dfs(graph);
+//        dfs(graph);
+        System.out.println(hasPath(graph, 0,5));
     }
 }
