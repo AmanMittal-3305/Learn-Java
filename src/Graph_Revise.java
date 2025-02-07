@@ -118,12 +118,74 @@ public class Graph_Revise {
         return false;
     }
 
+    public static boolean isCycle(ArrayList<Edge>[] graph){
+        boolean[] vis = new boolean[graph.length];
+        for(int i = 0; i < graph.length; i++){
+            if(!vis[i]){
+                if(isCycleUtil(graph, vis,i,-1)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isCycleUtil(ArrayList<Edge>[] graph, boolean[] vis, int src, int par){
+        vis[src] = true;
+        for(int i = 0; i < graph[src].size(); i++){
+            Edge e = graph[src].get(i);
+            //case 1
+            if(vis[e.dest] && e.dest != par){
+                return true;
+            }
+            //case 2
+            else if(!vis[e.dest]) {
+                if (isCycleUtil(graph, vis, e.dest, src)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isBiPartite(ArrayList<Edge>[] graph) {
+        int[] col = new int[graph.length];
+        Arrays.fill(col, -1);
+        Queue<Integer> q = new LinkedList<>();
+
+        for (int i = 0; i < graph.length; i++) {
+            if (col[i] == -1) {
+                q.add(i);
+                col[i] = 0;
+
+                while (!q.isEmpty()) {
+                    int curr = q.remove();
+
+                    for (Edge e : graph[curr]) {
+                        if (col[e.dest] == -1) {
+                            col[e.dest] = 1 - col[curr]; // Assign opposite color
+                            q.add(e.dest);
+                        } else if (col[e.dest] == col[curr]) {
+                            return false; // Conflict in coloring
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
+
     public static void main(String[] args) {
         int V = 7;
         ArrayList<Edge>[] graph = new ArrayList[V];
         createGraph(graph);
 //        bfs(graph);
 //        dfs(graph);
-        System.out.println(hasPath(graph, 0,5));
+//        System.out.println(hasPath(graph, 0,5));
+//        System.out.println(isCycle(graph));
+        System.out.println(isBiPartite(graph));
+
     }
 }
