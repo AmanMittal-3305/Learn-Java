@@ -42,7 +42,7 @@ public class DetectCycle_Graph_Dfs {
                 if (isCycleUtil(graph, e.dest, vis, curr)) {
                     return true;
                 }
-            } else if (e.dest != parent) {
+            } else if (vis[e.dest] && e.dest != parent) {
                 return true; // Cycle detected
             }
         }
