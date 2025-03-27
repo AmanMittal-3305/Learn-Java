@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Coin_Change {
+public class Coin_Change { // O(n * sum)
     public static void print(int[][] dp){
         for(int i = 0; i < dp.length; i++){
             for(int j = 0; j < dp[0].length; j++){
