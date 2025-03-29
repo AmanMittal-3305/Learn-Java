@@ -32,8 +32,8 @@ public class Coin_Change { // O(n * sum)
         return dp[n][sum];
     }
     public static void main(String[] args) {
-        int[] coins = {2,5,3,6};
-        int sum = 10;
+        int[] coins = {1,2,5};
+        int sum = 11;
         System.out.println("Answer is : " + totalWays(coins,sum));
     }
 }
