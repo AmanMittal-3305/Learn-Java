@@ -49,9 +49,7 @@ public class Zero_One_Knapsack_All_Methods {
         for(int i = 0; i < dp.length; i++){
             dp[i][0] = 0;
         }
-        for(int j = 0; j < dp[0].length; j++){
-            dp[0][j] = 0;
-        }
+        Arrays.fill(dp[0], 0);
         for(int i = 1; i < dp.length; i++){
             for(int j = 1; j < dp[0].length; j++){
                 int v = val[i-1]; //ith item value
