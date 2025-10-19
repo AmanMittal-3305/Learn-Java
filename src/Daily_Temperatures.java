@@ -10,9 +10,9 @@ public class Daily_Temperatures {
     {
         //method 1
         int n=temp.length;
-        int stack[]=new int[n];
+        int[] stack =new int[n];
         int top=-1;
-        int ans[]=new int[n];
+        int[] ans =new int[n];
 
         for(int i=0;i<n;i++)
         {
