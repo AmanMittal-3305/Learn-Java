@@ -31,6 +31,30 @@ public class Coin_Change { // O(n * sum)
         print(dp);
         return dp[n][sum];
     }
+
+    public int dpHelper(int[] coins, int amt, int[] dp) {
+        if (amt == 0) return 0; // no coins needed
+        if (amt < 0) return Integer.MAX_VALUE; // impossible
+        if (dp[amt] != -1) return dp[amt];
+
+        int minCoins = Integer.MAX_VALUE;
+        for (int coin : coins) {
+            int res = dpHelper(coins, amt - coin, dp);
+            if (res != Integer.MAX_VALUE) {
+                minCoins = Math.min(minCoins, 1 + res);
+            }
+        }
+
+        dp[amt] = minCoins;
+        return dp[amt];
+    }
+
+    public int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, -1);
+        int ans = dpHelper(coins, amount, dp);
+        return ans == Integer.MAX_VALUE ? -1 : ans;
+    }
     public static void main(String[] args) {
         int[] coins = {1,2,5};
         int sum = 11;
