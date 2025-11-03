@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Compute_Decimal_Representation {
     public int[] decimalRepresentation(int n) {
         List<Integer> list = new ArrayList<>();
